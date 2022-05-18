@@ -9,6 +9,7 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject var vm = ViewModel()
+    @State var showProfileView = false
     
     var body: some View {
         ZStack {
@@ -20,6 +21,11 @@ struct ContentView: View {
             List {
                 ForEach(vm.friendList) { friend in
                     FriendCellView(friend)
+                        .onTapGesture {
+                            showProfileView = true
+                        }.sheet(isPresented: $showProfileView) {
+                            ProfileView(friend)
+                        }
                 }
                 .listRowBackground(Color.yellow)
             }
