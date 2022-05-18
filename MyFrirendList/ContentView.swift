@@ -8,9 +8,23 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject var vm = ViewModel()
+    
     var body: some View {
-        Text("Hello, world!")
-            .padding()
+        ZStack {
+            //노란 배경
+            Rectangle()
+                .foregroundColor(.yellow)
+                .ignoresSafeArea()
+            //친구 리스트
+            List {
+                ForEach(vm.friendList) { friend in
+                    FriendCellView(friend)
+                }
+                .listRowBackground(Color.yellow)
+            }
+            .listStyle(.plain)
+        } //ZStack
     }
 }
 
