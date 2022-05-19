@@ -58,5 +58,6 @@ struct FriendCellView: View {
 struct FriendCellView_Previews: PreviewProvider {
     static var previews: some View {
         FriendCellView(Friend.getDummy())
+            .previewLayout(.sizeThatFits)
     }
 }

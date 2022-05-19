@@ -9,6 +9,8 @@ import SwiftUI
 
 struct ProfileView: View {
     
+    @Environment(\.dismiss) var dismiss
+    
     let urlStr = "https://randomuser.me/api/portraits/women/60.jpg"
     
     var friend: Friend
@@ -73,6 +75,19 @@ struct ProfileView: View {
                 .padding(20) // 버튼 3인방
             } // VStack
             .offset(y: 190)
+            VStack {
+                HStack {
+                    Image(systemName: "xmark.circle")
+                        .font(.title2)
+                    .foregroundColor(.white)
+                    .padding(30)
+                    .onTapGesture {
+                        dismiss()
+                    }
+                    Spacer()
+                }
+                Spacer()
+            }
         }
     }
 }
