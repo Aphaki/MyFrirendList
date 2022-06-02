@@ -10,21 +10,23 @@ import SwiftUI
 struct ContentView: View {
     @StateObject var vm = ViewModel()
     @State var showProfileView = false
+    @State private var selectedFriend: Friend? = nil
     
     var body: some View {
         ZStack {
             //노란 배경
-            Rectangle()
-                .foregroundColor(.yellow)
+            Color.yellow
                 .ignoresSafeArea()
+                .sheet(isPresented: $showProfileView) {
+                    ProfileView(friend: $selectedFriend)
+                }
             //친구 리스트
             List {
                 ForEach(vm.friendList) { friend in
                     FriendCellView(friend)
                         .onTapGesture {
+                            selectedFriend = friend
                             showProfileView = true
-                        }.sheet(isPresented: $showProfileView) {
-                            ProfileView(friend)
                         }
                 }
                 .listRowBackground(Color.yellow)
